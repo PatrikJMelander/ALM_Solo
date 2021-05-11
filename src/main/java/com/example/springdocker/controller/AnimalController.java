@@ -1,6 +1,8 @@
 package com.example.springdocker.controller;
 
+import com.example.springdocker.model.Animal;
 import com.example.springdocker.model.Food;
+import com.example.springdocker.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +29,7 @@ public class AnimalController {
     }
 
     @GetMapping("/animals/petable")
-    public List<String> getPetableoods() {
+    public List<String> getPetableAnimals() {
         return animalService.getPetableAnimals();
     }
 }
