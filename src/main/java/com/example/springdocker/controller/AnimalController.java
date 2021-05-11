@@ -27,6 +27,10 @@ public class AnimalController {
     public List<Animal> getAnimals() {
         return animalService.getAnimals();
     }
+    @PostMapping("/animals")
+    public void saveNewAnimal(@RequestBody Animal animal) {
+        animalService.saveNewAnimal(animal);
+    }
 
     @GetMapping("/animals/petable")
     public List<String> getPetableAnimals() {
