@@ -1,7 +1,6 @@
 package com.example.springdocker.controller;
 
 import com.example.springdocker.model.Animal;
-import com.example.springdocker.model.Food;
 import com.example.springdocker.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by Patrik Melander
- * Date: 2021-05-11
- * Time: 11:17
- * Project: SoloProject
- * Copyright: MIT
- */
 @RequiredArgsConstructor
 @RestController
 public class AnimalController {
