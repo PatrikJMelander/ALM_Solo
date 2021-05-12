@@ -1,6 +1,5 @@
 package com.example.springdocker.controller;
 
-import com.example.springdocker.model.Animal;
 import com.example.springdocker.model.Car;
 import com.example.springdocker.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,7 @@ public class CarController {
     }
 
     @PostMapping("/cars")
-    public void saveNewAnimal(@RequestBody Car car) {
+    public void saveNewCar(@RequestBody Car car) {
         carService.saveNewCar(car);
     }
 
