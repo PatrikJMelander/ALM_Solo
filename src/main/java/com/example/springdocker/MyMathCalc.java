@@ -15,6 +15,7 @@ public class MyMathCalc {
         return a*b;
     }
     public double divided (int a, int b){
+
         return a/b;
     }
 }
