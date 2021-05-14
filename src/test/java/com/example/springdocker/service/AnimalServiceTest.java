@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,8 +59,36 @@ class AnimalServiceTest {
     }
 
     @Test
-    void save(){
-        //Animal a = new Animal();
+    void saveSuccess(){
+        String expectedId = "1";
+        String expectedName = "Lucas";
+
+        Animal mockAnimal = new Animal();
+        mockAnimal.setId(expectedId);
+        mockAnimal.setName(expectedName);
+        // -----------------------------------
+
+        Animal actual = animalService.saveNewAnimal(mockAnimal);
+
+        // ----------------------------------
+
+        assertEquals(mockAnimal.getId(), actual.getId());
+        assertEquals(mockAnimal.getName(), actual.getName());
+
+        verify(mockRepository).save(any());
+        verify(mockRepository).existsAnimalByIdIgnoreCaseAndNameIgnoreCase(anyString(), anyString());
+    }
+
+    @Test
+    void saveDuplicate(){
+        Animal mockAnimal = new Animal();
         //animalService.saveNewAnimal(a);
     }
+
+    @Test
+    void saveNotValid(){
+        Animal mockAnimal = new Animal();
+        //animalService.saveNewAnimal(a);
+    }
+
 }
