@@ -1,6 +1,6 @@
 package com.example.springdocker.service;
 
-import com.example.springdocker.model.Animal;
+
 import com.example.springdocker.model.Car;
 import com.example.springdocker.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
