@@ -7,23 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-/**
- * Created by Patrik Melander
- * Date: 2021-05-14
- * Time: 10:39
- * Project: SoloProject
- * Copyright: MIT
- */
+
 @ExtendWith(MockitoExtension.class)
 class AnimalServiceTest {
     AnimalService animalService;
@@ -46,8 +42,6 @@ class AnimalServiceTest {
 
         when(mockRepository.findAll()).thenReturn(Arrays.asList(mockAnimal));
 
-        //mockRepository.save(mockAnimal);
-
         List<Animal> actual = animalService.getAnimals();
 
         assertEquals("1", actual.get(0).getId());
@@ -66,6 +60,11 @@ class AnimalServiceTest {
         Animal mockAnimal = new Animal();
         mockAnimal.setId(expectedId);
         mockAnimal.setName(expectedName);
+
+        when(mockRepository.existsAnimalByIdIgnoreCaseAndNameIgnoreCase(anyString(), anyString()))
+                .thenReturn(false);
+
+
         // -----------------------------------
 
         Animal actual = animalService.saveNewAnimal(mockAnimal);
@@ -75,20 +74,35 @@ class AnimalServiceTest {
         assertEquals(mockAnimal.getId(), actual.getId());
         assertEquals(mockAnimal.getName(), actual.getName());
 
-        verify(mockRepository).save(any());
-        verify(mockRepository).existsAnimalByIdIgnoreCaseAndNameIgnoreCase(anyString(), anyString());
-    }
 
-    @Test
-    void saveDuplicate(){
-        Animal mockAnimal = new Animal();
-        //animalService.saveNewAnimal(a);
     }
 
     @Test
     void saveNotValid(){
         Animal mockAnimal = new Animal();
-        //animalService.saveNewAnimal(a);
+
+        assertThrows(ResponseStatusException.class, () -> animalService.saveNewAnimal(mockAnimal));
+
+        verify(mockRepository, times(0)).save(any());
+        verify(mockRepository, times(0)).existsAnimalByIdIgnoreCaseAndNameIgnoreCase(anyString(), anyString());
+    }
+
+    @Test
+    void saveDuplicate(){
+        String expectedId = "1";
+        String expectedName = "Lucas";
+
+        Animal mockAnimal = new Animal();
+        mockAnimal.setId(expectedId);
+        mockAnimal.setName(expectedName);
+
+        when(mockRepository.existsAnimalByIdIgnoreCaseAndNameIgnoreCase(anyString(), anyString()))
+            .thenReturn(true);
+
+
+        assertThrows(ResponseStatusException.class, () -> animalService.saveNewAnimal(mockAnimal));
+
+        verify(mockRepository, times(0)).save(isA(Animal.class));
     }
 
 }

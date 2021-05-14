@@ -23,12 +23,14 @@ public class AnimalService {
         validateAnimal(animal);
 
 
+
         boolean found = animalRepository.existsAnimalByIdIgnoreCaseAndNameIgnoreCase(animal.getId(), animal.getName());
         if (found) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Animal already exists.");
         }
 
-        return animalRepository.save(animal);
+        animalRepository.save(animal);
+        return animal;
     }
 
     public List<String> getPetableAnimals() {
@@ -43,7 +45,7 @@ public class AnimalService {
 
     private void validateAnimal(Animal animal) {
         if (animal.getId() == null || animal.getName() == null || animal.getId().isEmpty() || animal.getName().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Both Author and Title must exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Both Id and Name must exist.");
         }
     }
 }
