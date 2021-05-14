@@ -35,5 +35,21 @@ class AnimalRepositoryTest {
 
     @Test
     void existsAnimalByIdIgnoreCaseAndNameIgnoreCaseTest() {
+        String expectedId = "1";
+        String expectedName = "Lucas";
+
+        Animal mockAnimal = new Animal();
+        mockAnimal.setId(expectedId);
+        mockAnimal.setName(expectedName);
+
+        String UpperCaseExpectedId = expectedId.toUpperCase();
+        String UpperCaseExpectedName = expectedName.toUpperCase();
+
+        boolean expected = expectedId.equalsIgnoreCase(UpperCaseExpectedId) && expectedName.equalsIgnoreCase(UpperCaseExpectedName);
+
+        boolean actual = animalRepository.existsAnimalByIdIgnoreCaseAndNameIgnoreCase(expectedId, expectedName);
+
+        assertEquals(expected, actual);
+
     }
 }
