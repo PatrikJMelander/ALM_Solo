@@ -15,7 +15,9 @@ public class MyMathCalc {
         return a*b;
     }
     public double divided (int a, int b){
-
+        if (a == 0 || b == 0){
+            throw new ArithmeticException("Can not divide with 0");
+        }
         return a/b;
     }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface AnimalRepository extends MongoRepository<Animal, String> {
 
     List<Animal> findAnimalByCanIPetIt(boolean canPet);
+
+    boolean existsAnimalByIdIgnoreCaseAndNameIgnoreCase(String id, String name);
 }
