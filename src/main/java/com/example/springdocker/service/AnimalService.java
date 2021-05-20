@@ -48,4 +48,6 @@ public class AnimalService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Both Id and Name must exist.");
         }
     }
+
+
 }
