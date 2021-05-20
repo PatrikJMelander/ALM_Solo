@@ -5,14 +5,21 @@ services:
 
   mongo:
     image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: my_solo_project
 
   mongo-express:
     image: mongo-express
     restart: always
+    depends_on:
+      - mongo
     #outgoing port:container port
     ports:
       - 9000:8081
