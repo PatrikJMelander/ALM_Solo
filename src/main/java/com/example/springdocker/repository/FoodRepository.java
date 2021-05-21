@@ -10,4 +10,5 @@ import java.util.List;
 public interface FoodRepository extends MongoRepository<Food, String> {
 
     List<Food> findFoodByCanICookIt(boolean canCook);
+
 }
