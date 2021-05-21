@@ -11,19 +11,16 @@ services:
 
   mongo-express:
     image: mongo-express
+    #outgoing port:container port
     ports:
       - 8081:8081
     depends_on:
       - mongo
 
   spring-boot-app:
+    build: .
     container_name: java-app
     ports:
       - 8080:8080
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-      DB_HOST: mongo
-      DB_PORT: 27017
-      DB_NAME: db_prod
     depends_on:
       - mongo
