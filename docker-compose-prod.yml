@@ -17,6 +17,7 @@ services:
       - mongo
 
   spring-boot-app:
+    image: my-db
     container_name: java-app
     ports:
       - 8080:8080
