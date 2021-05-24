@@ -24,15 +24,15 @@ jobs:
       - name: Dockerhub login
         uses: docker/login-action@v1
         with:
-          username: ${{ secret.DOCKERHUB_NAME }}
-          password: ${{ secret.DOCKERHUB_KEY }}
+          username: ${{ secrets.DOCKERHUB_NAME }}
+          password: ${{ secrets.DOCKERHUB_KEY }}
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ secret.DOCKERHUB_NAME }}/alm_solo:latest
+          tags: ${{ secrets.DOCKERHUB_NAME }}/alm_solo:latest
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
