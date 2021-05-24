@@ -1,0 +1,17 @@
+name: solo
+
+on:
+  push:
+
+  workflow_dispatch:
+
+jobs:
+  first_job:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: step 1
+        run:
+
+      - name: step 2
+        run:
