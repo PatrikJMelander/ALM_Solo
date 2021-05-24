@@ -1,17 +1,22 @@
-name: solo
+name: Tests CI
 
 on:
+  workflow_dispatch:
   push:
 
-  workflow_dispatch:
-
 jobs:
-  first_job:
-    runs-on: ubuntu-20.04
+  tests:
+    runs_on: ubuntu_latest
 
     steps:
-      - name: step 1
-        run:
+      - name: Checkout Code
+        uses: action/checkout@v2
 
-      - name: step 2
-        run:
+      - name: Set up JDK 11
+        uses: action/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Build Jar
+        run: mvn test
