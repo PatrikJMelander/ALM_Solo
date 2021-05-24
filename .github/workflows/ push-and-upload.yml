@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  someRandomName:
+  build-and-push:
 
     runs-on: ubuntu-latest
 
